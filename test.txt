@@ -1,0 +1,52 @@
+The core product of City Pantry is the recommendation and delivery of (food) packages from independent vendors to offices around London. Packages include items (main, side, drink, etc.) each of which consists of options (main: chicken, beef, halloumi, drink: coke, sprite, etc.). Options may have dietary information attached to them, such as "Vegetarian" or "Gluten free". All packages have at least one default item but some will have upgrade items that need to be selected by the customer to be included in an order.
+
+
+Your task is to write a single page website that implements the following funcationality:
+
+	Given information about a package and requirements about the headcount, budget and dietaries, display the package info on a page with items pre-selected and option quantities pre-assigend in such a way that best meets the given requirements (treat headcount and dietaries as hard requirements, budget as a preference).
+
+	For example, given a package with one default item priced at £9 with two options - one without dietaries and one labelled as vegetarian - given a headcount of 10 people, budget of £10 and a dietary requirement 2 x Vegetarian - the page should display the package info with 6 vegetarian and 4 other options assigned.
+
+	If the requirements for the example package above would include 2 x Halal then the page should display a message that the requirements could not be fullfilled.
+
+	Another example may include a £9 package with upgrade items priced at £2 and £3. Given £11 budget, the page should display the package info with the default and the first upgrade item pre-selected (to make up an overall cost of £11).
+
+
+You may use the following endpoints to retrieve the information about packages and existing dietary requirements:
+
+	https://api.citypantry.com/packages/<humanId>
+	https://api.citypantry.com/dietary-requirements
+
+	Example package human ids: 2104, 913, 6595, 4767 (you'll find more on the website by browsing the live existing packages)
+
+	
+Partial package model:
+
+	+------------+       +------------+       +--------+       +--------------------+
+	|   Package  |       |    Item    |       | Option |       | DietaryRequirement |
+	+------------+     * +------------+  1..* +--------+     * +--------------------+
+	| name       +-------> name       +-------> name   +-------> name               |
+	| decription |   |   | description|       +--------+       +--------------------+
+	| images     |   |   +------------+
+	+------------+   |
+					 |
+					 |
+			  +-------------+
+			  | PackageItem |
+			  +-------------+
+			  | price       |
+			  | quantity    |
+			  | isUpgrade   |
+			  +-------------+
+
+			  
+Structure your code as if this was a real, production application. You may however choose to provide simplified implementations for some aspects.
+
+State any assumptions you make as comments in the codebase. If any aspects of the above specification is unclear then please also state, as comments in the source, your interpretation of the requirement.
+
+The purpose of the exercise is to evaluate your approach to front end development covering among other things elements of Object Oriented Design, Software Design Patterns and Testing. This exercise is not time bounded.
+
+Complete the exercise in AngularJS 1. You are free to implement any mechanism for feeding input into your solution. You should provide sufficient evidence that your solution is complete by, as a minimum, indicating that it works correctly against the supplied test data.
+
+Please, do not use any external libraries to solve this problem, but you may use external libraries or tools for building or testing purposes. Specifically, you are encouraged to use Jasmine to test your code.
+
