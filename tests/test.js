@@ -1,25 +1,26 @@
-// describe('example test', function() {
-//   it('should be true', function() {
-//     expect('foo').toBe('foo');
-//   });
-// });
+describe('The FetchData service', function() {
 
-describe('Hello world test!', function() {
+  var dataFetcher;
+
   beforeEach(angular.mock.module("myApp"))
 
-  var $controller;
-
-  beforeEach(inject(function(_$controller_){
-    // The injector unwraps the underscores (_) from around the parameter names when matching
-    $controller = _$controller_;
+  beforeEach(inject(function(_dataFetcher_) {
+    dataFetcher = _dataFetcher_;
   }));
 
-  describe('$scope.grade', function() {
-    it('set hello world message', function() {
-      var $scope = {};
-      var controller = $controller('helloWorldController', { $scope: $scope });
-      $scope.sayHello();
-      expect($scope.msg).toEqual('Hello World!');
-    });
+  it('should fetch data', function(done) {
+
+    var testData = function(res) {
+      expect(res.success).toBe(true);
+    };
+
+    var failTest = function(error) {
+      expect(error).toBeUndefined();
+    };
+
+    dataFetcher.getPackageByHumanId(2104)
+      .then(testData)
+      .catch(failTest);
+
   });
 });

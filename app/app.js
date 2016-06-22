@@ -1,31 +1,9 @@
 var angular = require('angular');
 var ngMock = require('angular-mocks');
+var mainCtrl = require('./app.main.controller.js');
+var dataFetcher = require('./app.dataFetcher.service.js');
 
 var myApp = angular.module('myApp', []);
 
-myApp.controller('helloWorldController', function($scope, dataFetcher) {
-
-	console.log('hello world!!!!');
-
-    $scope.msg = '';
-
-    $scope.sayHello = function() {
-        $scope.msg = 'Hello World!';
-    };
-
-    dataFetcher.getPackageByHumanId(2104).then(function (data) {
-    	console.log('data', data);
-    });
-
-});
-
-myApp.factory('dataFetcher', function($http) {
-   return {
-        getPackageByHumanId: function(humanId) {
-             return $http.get('https://api.citypantry.com/packages/' + humanId)
-                       .then(function(result) {
-                            return result.data;
-                        });
-        }
-   }
-});
+myApp.controller('mainCtrl', mainCtrl);
+myApp.factory('dataFetcher', dataFetcher);
