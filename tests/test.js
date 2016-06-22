@@ -1,26 +1,30 @@
 describe('The FetchData service', function() {
 
-  var dataFetcher;
+   var mainCtrl, dataFetcher, $httpBackend, $rootScope, createController, authRequestHandler;
 
   beforeEach(angular.mock.module("myApp"))
 
-  beforeEach(inject(function(_dataFetcher_) {
+  beforeEach(inject(function(_dataFetcher_, _$httpBackend_) {
     dataFetcher = _dataFetcher_;
+    $httpBackend = _$httpBackend_;
+
+    $httpBackend
+      .when('GET', 'https://api.citypantry.com/packages/1')
+      .respond({
+        success: true
+      });
   }));
 
-  it('should fetch data', function(done) {
+   afterEach(function() {
+     $httpBackend.verifyNoOutstandingExpectation();
+     $httpBackend.verifyNoOutstandingRequest();
+   });
 
-    var testData = function(res) {
-      expect(res.success).toBe(true);
-    };
+  it('should fetch data', function () {
+    dataFetcher.getPackageByHumanId(1);
 
-    var failTest = function(error) {
-      expect(error).toBeUndefined();
-    };
+     $httpBackend.flush();
+   });
 
-    dataFetcher.getPackageByHumanId(2104)
-      .then(testData)
-      .catch(failTest);
-
-  });
 });
+
