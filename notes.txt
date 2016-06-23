@@ -1,0 +1,17 @@
+
+
+https://docs.angularjs.org/guide/unit-testing
+
+http://jbavari.github.io/blog/2014/06/11/unit-testing-angularjs-services/
+
+http://ericnish.io/blog/set-up-jasmine-and-karma-for-angularjs/
+
+http://andyshora.com/unit-testing-best-practices-angularjs.html
+
+https://www.airpair.com/angularjs/posts/unit-testing-angularjs-applications
+
+https://quickleft.com/blog/angularjs-unit-testing-for-real-though/
+
+https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
+
+https://scotch.io/tutorials/angularjs-best-practices-directory-structure
