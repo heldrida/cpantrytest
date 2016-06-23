@@ -24,6 +24,7 @@ describe('The FetchData service', function() {
 			status = 'success';
 			data = res.data;
 			expect(res.success).toEqual(true);
+			expect(status).toEqual('success');
 		}
 
 		function errorHandler(){
@@ -41,8 +42,6 @@ describe('The FetchData service', function() {
 		dataFetcher.getPackageByHumanId(pid).then(successHandler, errorHandler);
 
 		$httpBackend.flush();
-
-		expect(status).toEqual('success');
 
 	});
 
