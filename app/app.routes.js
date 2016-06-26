@@ -12,8 +12,8 @@ module.exports = function($stateProvider, $urlRouterProvider){
         templateUrl: 'list-packages.html',
         controller: packagesCtrl
     })
-    .state('package-info', {
-        url: '/package-info',
+    .state('packages.info', {
+        url: '/info',
         templateUrl: 'package-info.html'
     });
 
