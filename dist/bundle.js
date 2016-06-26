@@ -40626,7 +40626,7 @@
 	        controller: packagesCtrl
 	    })
 	    .state('packages.info', {
-	        url: '/info',
+	        url: '/info/:id',
 	        templateUrl: 'package-info.html'
 	    });
 
@@ -40640,12 +40640,13 @@
 
 		$scope.packages = [];
 
-	    dataFetcher.getAll().then(list);
-
-	    function list(res) {
-	    	console.log('res', res);
-	    	$scope.packages.push(res.package);
-	    }
+	    var promises = dataFetcher.getAll();
+	    promises.then(function (res) {
+	    	_.forEach(res, function (v) {
+		    	$scope.packages.push(v.data.package);
+	    	});
+	    	console.log("$scope.packages", $scope.packages);
+	    });
 
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
@@ -53099,7 +53100,7 @@
 /* 17 */
 /***/ function(module, exports) {
 
-	module.exports = [6604, 3072, 6511, 6977, 2104, 913, 5434, 6595, 4767, 7544, 8886];
+	module.exports = [3072, 6511, 6977, 2104, 913, 5434, 6595, 4767, 7544, 8886];
 
 /***/ }
 /******/ ]);

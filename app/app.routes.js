@@ -13,7 +13,7 @@ module.exports = function($stateProvider, $urlRouterProvider){
         controller: packagesCtrl
     })
     .state('packages.info', {
-        url: '/info',
+        url: '/info/:id',
         templateUrl: 'package-info.html'
     });
 

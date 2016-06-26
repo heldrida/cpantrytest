@@ -1,5 +1,10 @@
 <h1>list packages</h1>
-<a ui-sref='packages.info'>Click</a>
 
+<div ng-repeat="p in packages track by p.id">
+	<a ui-sref='packages.info({ id: p.humanId })'>
+		<img ng-src={{p.images[0].medium}} />
+		{{p.name}}
+	</a>
+</div>
 
 <ui-view/>
