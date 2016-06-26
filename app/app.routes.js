@@ -1,3 +1,5 @@
+var packagesCtrl = require('./app.packages.controller.js');
+
 module.exports = function($stateProvider, $urlRouterProvider){
 
   $stateProvider
@@ -8,7 +10,7 @@ module.exports = function($stateProvider, $urlRouterProvider){
     .state('packages', {
         url: '/packages',
         templateUrl: 'list-packages.html',
-        controller: 'mainCtrl'
+        controller: packagesCtrl
     })
     .state('package-info', {
         url: '/package-info',

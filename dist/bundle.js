@@ -48,13 +48,11 @@
 	var ngMock = __webpack_require__(10);
 	var uiRouter = __webpack_require__(11);
 	var routes = __webpack_require__(12);
-	var mainCtrl = __webpack_require__(13);
 	var dataFetcher = __webpack_require__(14);
 
 	var myApp = angular.module('myApp', [uiRouter]);
 
 	myApp.config(routes);
-	myApp.controller('mainCtrl', mainCtrl);
 	myApp.factory('dataFetcher', dataFetcher);
 
 /***/ },
@@ -40611,7 +40609,9 @@
 
 /***/ },
 /* 12 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	var packagesCtrl = __webpack_require__(13);
 
 	module.exports = function($stateProvider, $urlRouterProvider){
 
@@ -40623,7 +40623,7 @@
 	    .state('packages', {
 	        url: '/packages',
 	        templateUrl: 'list-packages.html',
-	        controller: 'mainCtrl'
+	        controller: packagesCtrl
 	    })
 	    .state('package-info', {
 	        url: '/package-info',
@@ -40637,9 +40637,16 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function ($scope, dataFetcher) {
-	    dataFetcher.getPackageByHumanId(2104).then(function (data) {
+
+		console.log("packagesCtrl loaded!");
+
+	    dataFetcher.getPackageByHumanId(2104).then(list);
+
+	    function list(data) {
+	    	console.log('fooooo');
 	    	console.log('data', data);
-	    });
+	    }
+
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
