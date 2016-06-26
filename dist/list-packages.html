@@ -1,10 +1,14 @@
 <h1>list packages</h1>
 
-<div ng-repeat="p in packages track by p.id">
-	<a ui-sref='packages.info({ id: p.humanId })'>
-		<img ng-src={{p.images[0].medium}} />
-		{{p.name}}
-	</a>
+<!-- start: packages -->
+<div class="packages">
+	<div ng-repeat="p in packages track by p.id">
+		<a ui-sref='packages.info({ id: p.humanId })'>
+			<img ng-src={{p.images[0].medium}} />
+			{{p.name}}
+		</a>
+	</div>
 </div>
+<!-- end: packages -->
 
 <ui-view/>
