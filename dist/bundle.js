@@ -40640,7 +40640,7 @@
 
 		$scope.packages = [];
 
-	    dataFetcher.getPackageByHumanId(2104).then(list);
+	    dataFetcher.getAll().then(list);
 
 	    function list(res) {
 	    	console.log('res', res);
@@ -40654,7 +40654,7 @@
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(15);
+	/* WEBPACK VAR INJECTION */(function(console) {var _ = __webpack_require__(15);
 
 	module.exports = function($http, $q) {
 
@@ -40662,7 +40662,11 @@
 
 		function reqPackageById(humanId) {
 
-			var p = $http.get('https://api.citypantry.com/packages/' + humanId);
+			var p = $http
+						.get('https://api.citypantry.com/packages/' + humanId)
+						.error(function (data, status, headers, config) {
+							console.log(status);
+						});
 
 			p.then(function (res) {
 				var id = res.data.package.humanId;
@@ -40676,9 +40680,9 @@
 
 		function getAll($http, $q) {
 
-			var packages = [2104, 913, 6595, 4767];
+			var packages = __webpack_require__(17);
 			var promises = [];
-			
+
 			_.forEach(packages, function(v) {
 
 				var promise = reqPackageById(v);
@@ -40686,7 +40690,7 @@
 
 			});
 
-			return promises;
+			return $q.all(promises);
 
 		};
 
@@ -40699,11 +40703,15 @@
 		}
 
 		return {
+			getAll: function () {
+				return getAll($http, $q);
+			},
+
 			getPackageByHumanId: function(humanId) {
 
 				var promises = getAll($http, $q);
 
-				return $q.all(promises).then(function (res) {
+				return promises.then(function (res) {
 					return getPackageById(humanId);
 				});
 
@@ -40711,6 +40719,7 @@
 		}
 
 	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 15 */
@@ -53085,6 +53094,12 @@
 		return module;
 	}
 
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	module.exports = [6604, 3072, 6511, 6977, 2104, 913, 5434, 6595, 4767, 7544, 8886];
 
 /***/ }
 /******/ ]);

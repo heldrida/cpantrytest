@@ -6,7 +6,11 @@ module.exports = function($http, $q) {
 
 	function reqPackageById(humanId) {
 
-		var p = $http.get('https://api.citypantry.com/packages/' + humanId);
+		var p = $http
+					.get('https://api.citypantry.com/packages/' + humanId)
+					.error(function (data, status, headers, config) {
+						console.log(status);
+					});
 
 		p.then(function (res) {
 			var id = res.data.package.humanId;
@@ -20,9 +24,9 @@ module.exports = function($http, $q) {
 
 	function getAll($http, $q) {
 
-		var packages = [2104, 913, 6595, 4767];
+		var packages = require('./data/packages.js');
 		var promises = [];
-		
+
 		_.forEach(packages, function(v) {
 
 			var promise = reqPackageById(v);
@@ -30,7 +34,7 @@ module.exports = function($http, $q) {
 
 		});
 
-		return promises;
+		return $q.all(promises);
 
 	};
 
@@ -43,11 +47,15 @@ module.exports = function($http, $q) {
 	}
 
 	return {
+		getAll: function () {
+			return getAll($http, $q);
+		},
+
 		getPackageByHumanId: function(humanId) {
 
 			var promises = getAll($http, $q);
 
-			return $q.all(promises).then(function (res) {
+			return promises.then(function (res) {
 				return getPackageById(humanId);
 			});
 
